@@ -15,6 +15,7 @@ import com.software.software_development.model.entity.UserEntity;
 import com.software.software_development.model.enums.UserRole;
 import com.software.software_development.service.entity.CategoryService;
 import com.software.software_development.service.entity.ProductService;
+import com.software.software_development.service.entity.PurchaseService;
 import com.software.software_development.service.entity.ReviewService;
 import com.software.software_development.service.entity.UserService;
 
@@ -26,6 +27,7 @@ public class EntityInitializer {
 
     private final CategoryService categoryService;
     private final ProductService productService;
+    private final PurchaseService purchaseService;
     private final ReviewService reviewService;
     private final UserService userService;
 
@@ -39,12 +41,14 @@ public class EntityInitializer {
         List<UserEntity> users = createUsers();
         List<CategoryEntity> categories = createCategories();
         List<ProductEntity> products = createProducts(users, categories);
+        createPurchases(users, products);
         createReviews(users, products);
         refreshSearchFields();
     }
 
     @Transactional
     public void refreshSearchFields() {
+        reviewService.ensurePurchasesForExistingReviews();
         productService.refreshSearchFields();
         reviewService.refreshSearchFields();
     }
@@ -123,5 +127,14 @@ public class EntityInitializer {
                 products.get(4).getId(), users.get(1).getId(), 5);
         reviewService.create(new ReviewEntity(null, null, "Нормальная лампа", "Настройка цвета удобная, приложение простое."),
                 products.get(5).getId(), users.get(0).getId(), 3);
+    }
+
+    private void createPurchases(List<UserEntity> users, List<ProductEntity> products) {
+        purchaseService.buy(products.get(0).getId(), users.get(1).getId());
+        purchaseService.buy(products.get(1).getId(), users.get(2).getId());
+        purchaseService.buy(products.get(2).getId(), users.get(0).getId());
+        purchaseService.buy(products.get(3).getId(), users.get(2).getId());
+        purchaseService.buy(products.get(4).getId(), users.get(1).getId());
+        purchaseService.buy(products.get(5).getId(), users.get(0).getId());
     }
 }

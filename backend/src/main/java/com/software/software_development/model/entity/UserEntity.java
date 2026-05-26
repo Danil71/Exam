@@ -57,6 +57,10 @@ public class UserEntity extends BaseEntity {
     @OrderBy("id ASC")
     private Set<RatingEntity> ratings = new HashSet<>();
 
+    @OneToMany(mappedBy = "buyer")
+    @OrderBy("purchasedAt DESC")
+    private Set<PurchaseEntity> purchases = new HashSet<>();
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("id ASC")
     private Set<RefreshTokenEntity> tokens = new HashSet<>();

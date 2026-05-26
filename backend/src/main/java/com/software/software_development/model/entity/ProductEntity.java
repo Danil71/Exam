@@ -65,6 +65,10 @@ public class ProductEntity extends BaseEntity {
     @OrderBy("id ASC")
     private Set<RatingEntity> ratings = new HashSet<>();
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("purchasedAt DESC")
+    private Set<PurchaseEntity> purchases = new HashSet<>();
+
     public ProductEntity(String name, String description, BigDecimal price, int stock, UserEntity owner) {
         this.name = name;
         this.description = description;

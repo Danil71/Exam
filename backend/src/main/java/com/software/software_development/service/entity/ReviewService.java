@@ -22,6 +22,7 @@ public class ReviewService extends AbstractEntityService<ReviewEntity> {
     private final ProductService productService;
     private final UserService userService;
     private final RatingService ratingService;
+    private final PurchaseService purchaseService;
 
     @Transactional(readOnly = true)
     public Page<ReviewEntity> getMy(ReviewFilterParams params, int page, int size) {
@@ -44,6 +45,7 @@ public class ReviewService extends AbstractEntityService<ReviewEntity> {
     public ReviewEntity create(ReviewEntity entity, Long productId, Long authorId, int ratingValue) {
         ProductEntity product = productService.get(productId);
         UserEntity author = userService.get(authorId);
+        validatePurchased(productId, authorId);
         repository.findByProductIdAndAuthorId(productId, authorId).ifPresent(existing -> {
             throw new IllegalArgumentException("You have already reviewed this product");
         });
@@ -58,6 +60,7 @@ public class ReviewService extends AbstractEntityService<ReviewEntity> {
     @Transactional
     public ReviewEntity update(long id, ReviewEntity entity, Long authorId, int ratingValue) {
         ReviewEntity existing = getOwned(id, authorId);
+        validatePurchased(existing.getProduct().getId(), authorId);
         existing.setTitle(entity.getTitle());
         existing.setText(entity.getText());
         existing.setRating(ratingService.upsert(existing.getProduct(), existing.getAuthor(), ratingValue));
@@ -84,12 +87,25 @@ public class ReviewService extends AbstractEntityService<ReviewEntity> {
         });
     }
 
+    @Transactional
+    public void ensurePurchasesForExistingReviews() {
+        repository.findAllList().forEach(review ->
+                purchaseService.ensureExists(review.getProduct(), review.getAuthor())
+        );
+    }
+
     private ReviewEntity getOwned(long id, Long authorId) {
         ReviewEntity review = get(id);
         if (!review.getAuthor().getId().equals(authorId)) {
             throw new IllegalArgumentException("You can edit only your own reviews");
         }
         return review;
+    }
+
+    private void validatePurchased(Long productId, Long authorId) {
+        if (!purchaseService.hasPurchased(productId, authorId)) {
+            throw new IllegalArgumentException("You can review only purchased products");
+        }
     }
 
     @Override

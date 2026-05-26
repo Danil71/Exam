@@ -8,10 +8,12 @@ import org.springframework.stereotype.Component;
 
 import com.software.software_development.model.entity.CategoryEntity;
 import com.software.software_development.model.entity.ProductEntity;
+import com.software.software_development.model.entity.PurchaseEntity;
 import com.software.software_development.model.entity.RatingEntity;
 import com.software.software_development.model.entity.ReviewEntity;
 import com.software.software_development.web.dto.entity.CategoryDto;
 import com.software.software_development.web.dto.entity.ProductDto;
+import com.software.software_development.web.dto.entity.PurchaseDto;
 import com.software.software_development.web.dto.entity.RatingDto;
 import com.software.software_development.web.dto.entity.ReviewDto;
 
@@ -90,6 +92,17 @@ public class ShopDtoMapper {
         dto.setProductId(entity.getProduct().getId());
         dto.setAuthorId(entity.getAuthor().getId());
         dto.setValue(entity.getValue());
+        return dto;
+    }
+
+    public PurchaseDto toPurchaseDto(PurchaseEntity entity) {
+        PurchaseDto dto = new PurchaseDto();
+        dto.setId(entity.getId());
+        dto.setProductId(entity.getProduct().getId());
+        dto.setProduct(toProductDto(entity.getProduct()));
+        dto.setBuyerId(entity.getBuyer().getId());
+        dto.setBuyerLogin(entity.getBuyer().getLogin());
+        dto.setPurchasedAt(entity.getPurchasedAt());
         return dto;
     }
 }

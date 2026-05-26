@@ -10,7 +10,7 @@ import CategoriesPage from './pages/CategoriesPage.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import Homepage from './pages/Homepage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
-import MyReviewsPage from './pages/MyReviewsPage.jsx';
+import MyPurchasesPage from './pages/MyPurchasesPage.jsx';
 import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import ProductsPage from './pages/ProductsPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
                     { index: true, element: <Homepage /> },
                     { path: 'products', element: <ProductsPage /> },
                     { path: 'products/:id', element: <ProductDetailPage /> },
-                    { path: 'my-reviews', element: <MyReviewsPage /> },
+                    { path: 'my-purchases', element: <MyPurchasesPage /> },
                     { path: 'admin/products', element: <AdminProductsPage /> },
                     { path: 'admin/categories', element: <CategoriesPage /> },
                     { path: 'admin/users', element: <UsersPage /> },

@@ -26,7 +26,7 @@ const Navigation = observer(() => {
                         <Offcanvas.Body>
                             <Nav className="me-auto">
                                 <Nav.Link as={Link} to="/products">Каталог</Nav.Link>
-                                <Nav.Link as={Link} to="/my-reviews">Мои отзывы</Nav.Link>
+                                <Nav.Link as={Link} to="/my-purchases">Мои покупки</Nav.Link>
                                 {store.isAdmin && (
                                     <NavDropdown title="Администрирование" data-testid="nav-management-dropdown">
                                         <NavDropdown.Item as={Link} to="/admin/products">Товары</NavDropdown.Item>

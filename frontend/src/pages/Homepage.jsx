@@ -20,9 +20,9 @@ const Homepage = () => (
             <Col xs={12} md={6}>
                 <Card>
                     <Card.Body>
-                        <Card.Title>Мои отзывы</Card.Title>
-                        <Card.Text>Отзывы текущего пользователя с фильтром по оценке и дате.</Card.Text>
-                        <Button as={Link} to="/my-reviews" variant="primary">Открыть</Button>
+                        <Card.Title>Мои покупки</Card.Title>
+                        <Card.Text>Купленные товары, по которым можно перейти к деталям и оставить отзыв.</Card.Text>
+                        <Button as={Link} to="/my-purchases" variant="primary">Открыть</Button>
                     </Card.Body>
                 </Card>
             </Col>

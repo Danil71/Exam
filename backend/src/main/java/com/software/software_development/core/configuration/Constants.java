@@ -8,6 +8,7 @@ public class Constants {
     public static final String AUTH_URL = "/auth";
     public static final String PRODUCTS_URL = "/products";
     public static final String REVIEWS_URL = "/reviews";
+    public static final String PURCHASES_URL = "/purchases";
     public static final String CATEGORIES_URL = "/categories";
     public static final String DEFAULT_PAGE_SIZE = "10";
 

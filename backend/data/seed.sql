@@ -21,13 +21,13 @@
 
 -- Связи:
 --   Product M:N Category через product_category
---   User 1:N Product, User 1:N Review, User 1:N Rating
---   Product 1:N Review, Product 1:N Rating
+--   User 1:N Product, User 1:N Purchase, User 1:N Review, User 1:N Rating
+--   Product 1:N Purchase, Product 1:N Review, Product 1:N Rating
 
 -- Отзывы и оценки (6):
---   пользователи оставляют отзывы с оценками 1..5;
+--   пользователи сначала покупают товары, затем оставляют отзывы с оценками 1..5;
 --   для пары user/product допускается только один review и один rating.
 
 -- Схема соответствует сущностям:
 --   user_info, product, category, product_category,
---   review, rating, refresh_token
+--   purchase, review, rating, refresh_token

@@ -90,8 +90,9 @@ public class UserService extends AbstractEntityService<UserEntity> {
     @Transactional
     public UserEntity delete(long id) {
         UserEntity existing = get(id);
-        if (!existing.getProducts().isEmpty() || !existing.getReviews().isEmpty() || !existing.getRatings().isEmpty()) {
-            throw new IllegalArgumentException("User has products, reviews or ratings and cannot be deleted");
+        if (!existing.getProducts().isEmpty() || !existing.getReviews().isEmpty()
+                || !existing.getRatings().isEmpty() || !existing.getPurchases().isEmpty()) {
+            throw new IllegalArgumentException("User has products, purchases, reviews or ratings and cannot be deleted");
         }
         repository.delete(existing);
         return existing;

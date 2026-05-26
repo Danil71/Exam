@@ -52,6 +52,7 @@ public class SecurityConfiguration {
                         .requestMatchers(Constants.API_URL + Constants.ADMIN_PREFIX + "/**").hasRole("MANAGER")
                         .requestMatchers(Constants.API_URL + Constants.PRODUCTS_URL + "/**").authenticated()
                         .requestMatchers(Constants.API_URL + Constants.REVIEWS_URL + "/**").authenticated()
+                        .requestMatchers(Constants.API_URL + Constants.PURCHASES_URL + "/**").authenticated()
                         .requestMatchers(Constants.API_URL + Constants.CATEGORIES_URL + "/**").authenticated()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
