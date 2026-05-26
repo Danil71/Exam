@@ -10,9 +10,8 @@ const UsersTable = ({ children }) => {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Электронная почта</th>
-                    <th scope="col">Номер телефона</th>
+                    <th scope="col">Логин</th>
                     <th scope="col">Роль</th>
-                    <th scope="col">Владелец аккаунта</th>
                     <th scope="col" />
                     <th scope="col" />
                 </tr>

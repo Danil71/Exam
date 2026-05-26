@@ -5,7 +5,6 @@ import com.software.software_development.core.configuration.Constants;
 import com.software.software_development.model.enums.UserRole;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -32,10 +31,4 @@ public class UserDto {
 
     @NotNull
     private UserRole role;
-
-    @Min(1)
-    private Long employeeId;
-
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String employeeName;
 }

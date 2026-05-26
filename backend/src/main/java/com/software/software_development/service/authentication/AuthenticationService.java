@@ -70,7 +70,6 @@ public class AuthenticationService {
         dto.setLogin(user.getLogin());
         dto.setEmail(user.getEmail());
         dto.setRole(user.getRole());
-        dto.setEmployeeId(user.getEmployee() != null ? user.getEmployee().getId() : null);
         return dto;
     }
 }

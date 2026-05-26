@@ -8,8 +8,6 @@ const useUser = (id) => {
         email: '',
         password: '',
         role: 'USER',
-        employeeId: '',
-        employeeName: '',
     };
 
     const [user, setUser] = useState({ ...emptyUser });

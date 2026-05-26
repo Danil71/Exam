@@ -14,8 +14,6 @@ const useUsersFormModal = (usersChangeHandle) => {
         validated,
         handleSubmit,
         handleChange,
-        handleEmployeeChange,
-        initialEmployee,
         resetValidity,
     } = useUsersForm(currentId, usersChangeHandle);
 
@@ -41,8 +39,6 @@ const useUsersFormModal = (usersChangeHandle) => {
         isFormValidated: validated,
         showFormModal: showModalDialog,
         currentUser: user,
-        handleEmployeeChange,
-        initialEmployee,
         handleUserChange: handleChange,
         handleFormSubmit: onSubmit,
         handleFormClose: onClose,

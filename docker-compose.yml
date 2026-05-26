@@ -1,0 +1,10 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: exam-shop-backend
+    command: ["--populate"]
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/data:/app/data

@@ -5,15 +5,14 @@ import App from './App.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { StoreProvider } from './components/users/StoreContext.jsx';
 import './index.css';
-import DepartmentsPage from './pages/DepartmentsPage.jsx';
-import DirectoryPage from './pages/DirectoryPage.jsx';
-import EmployeeDetailPage from './pages/EmployeeDetailPage.jsx';
-import EmployeesPage from './pages/EmployeesPage.jsx';
+import AdminProductsPage from './pages/AdminProductsPage.jsx';
+import CategoriesPage from './pages/CategoriesPage.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import Homepage from './pages/Homepage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
-import MyEmployeesPage from './pages/MyEmployeesPage.jsx';
-import PhoneNumbersPage from './pages/PhoneNumbersPage.jsx';
+import MyReviewsPage from './pages/MyReviewsPage.jsx';
+import ProductDetailPage from './pages/ProductDetailPage.jsx';
+import ProductsPage from './pages/ProductsPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import UsersPage from './pages/UsersPage.jsx';
 
@@ -29,13 +28,12 @@ const router = createBrowserRouter([
                 element: <ProtectedRoute />,
                 children: [
                     { index: true, element: <Homepage /> },
-                    { path: 'my-employees', element: <MyEmployeesPage /> },
-                    { path: 'directory', element: <DirectoryPage /> },
-                    { path: 'employees/:id', element: <EmployeeDetailPage /> },
-                    { path: 'admin/department', element: <DepartmentsPage /> },
-                    { path: 'admin/employee', element: <EmployeesPage /> },
-                    { path: 'admin/user', element: <UsersPage /> },
-                    { path: 'admin/phone-number', element: <PhoneNumbersPage /> },
+                    { path: 'products', element: <ProductsPage /> },
+                    { path: 'products/:id', element: <ProductDetailPage /> },
+                    { path: 'my-reviews', element: <MyReviewsPage /> },
+                    { path: 'admin/products', element: <AdminProductsPage /> },
+                    { path: 'admin/categories', element: <CategoriesPage /> },
+                    { path: 'admin/users', element: <UsersPage /> },
                 ],
             },
         ],

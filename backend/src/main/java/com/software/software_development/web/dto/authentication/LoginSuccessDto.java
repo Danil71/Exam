@@ -13,5 +13,4 @@ public class LoginSuccessDto {
     private String login;
     private String email;
     private UserRole role;
-    private Long employeeId;
 }

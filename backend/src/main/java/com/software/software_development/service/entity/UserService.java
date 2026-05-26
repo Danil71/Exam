@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.software.software_development.core.configuration.Constants;
 import com.software.software_development.core.error.NotFoundException;
 import com.software.software_development.core.utility.ValidationUtils;
-import com.software.software_development.model.entity.EmployeeEntity;
 import com.software.software_development.model.entity.UserEntity;
 import com.software.software_development.model.enums.UserRole;
 import com.software.software_development.repository.UserRepository;
@@ -25,7 +24,6 @@ public class UserService extends AbstractEntityService<UserEntity> {
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
-    private final EmployeeService employeeService;
 
     @Transactional(readOnly = true)
     public List<UserEntity> getAll() {
@@ -70,7 +68,7 @@ public class UserService extends AbstractEntityService<UserEntity> {
         if (repository.findByEmailIgnoreCase(email).isPresent()) {
             throw new IllegalArgumentException("User with email " + email + " already exists");
         }
-        UserEntity user = new UserEntity(login, email, password, UserRole.USER, null);
+        UserEntity user = new UserEntity(login, email, password, UserRole.USER);
         validate(user, null);
         user.setPassword(passwordEncoder.encode(password));
         return repository.save(user);
@@ -86,15 +84,15 @@ public class UserService extends AbstractEntityService<UserEntity> {
             existing.setPassword(passwordEncoder.encode(entity.getPassword()));
         }
         existing.setRole(entity.getRole());
-        if (entity.getEmployee() != null) {
-            existing.setEmployee(entity.getEmployee());
-        }
         return repository.save(existing);
     }
 
     @Transactional
     public UserEntity delete(long id) {
         UserEntity existing = get(id);
+        if (!existing.getProducts().isEmpty() || !existing.getReviews().isEmpty() || !existing.getRatings().isEmpty()) {
+            throw new IllegalArgumentException("User has products, reviews or ratings and cannot be deleted");
+        }
         repository.delete(existing);
         return existing;
     }
@@ -133,15 +131,5 @@ public class UserService extends AbstractEntityService<UserEntity> {
                 throw new IllegalArgumentException("User with email " + entity.getEmail() + " already exists");
             }
         });
-
-        if (entity.getEmployee() != null && entity.getEmployee().getId() != null) {
-            EmployeeEntity employee = employeeService.get(entity.getEmployee().getId());
-            repository.findByEmployeeId(employee.getId()).ifPresent(existing -> {
-                if (!existing.getId().equals(id)) {
-                    throw new IllegalArgumentException("Employee is already linked to another user");
-                }
-            });
-            entity.setEmployee(employee);
-        }
     }
 }

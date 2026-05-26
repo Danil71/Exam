@@ -9,10 +9,10 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.software</groupId>
-	<artifactId>phone_directory</artifactId>
+	<artifactId>online_shop_reviews</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>phone_directory</name>
-	<description>Phone directory - GOS exam project</description>
+	<name>online_shop_reviews</name>
+	<description>Online shop reviews - exam project</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>

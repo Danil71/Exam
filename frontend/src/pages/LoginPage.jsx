@@ -34,7 +34,7 @@ const LoginPage = observer(() => {
         <Container className="py-5" style={{ maxWidth: 420 }}>
             <Card>
                 <Card.Body>
-                    <Card.Title className="text-center mb-4">Вход в справочник</Card.Title>
+                    <Card.Title className="text-center mb-4">Вход в магазин</Card.Title>
                     {loginError && (
                         <div className="alert alert-danger py-2" role="alert" data-testid="login-error">
                             {loginError}

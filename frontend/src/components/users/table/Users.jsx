@@ -30,7 +30,6 @@ const Users = () => {
         isFormValidated,
         showFormModal,
         currentUser,
-        handleEmployeeChange,
         handleUserChange,
         handleFormSubmit,
         handleFormClose,
@@ -60,7 +59,7 @@ const Users = () => {
             <ModalForm show={isFormModalShow} validated={isFormValidated}
                 onSubmit={handleFormSubmit} onClose={handleFormClose}
                 title='Редактирование'>
-                <UsersForm user={currentUser} handleChange={handleUserChange} handleEmployeeChange={handleEmployeeChange}/>
+                <UsersForm user={currentUser} handleChange={handleUserChange}/>
             </ModalForm>
         </>
     );

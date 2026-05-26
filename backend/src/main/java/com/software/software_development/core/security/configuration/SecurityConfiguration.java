@@ -50,8 +50,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, Constants.API_URL + Constants.AUTH_URL + "/refresh-token").permitAll()
                         .requestMatchers(HttpMethod.PUT, Constants.API_URL + Constants.AUTH_URL + "/refresh-token-direct").permitAll()
                         .requestMatchers(Constants.API_URL + Constants.ADMIN_PREFIX + "/**").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.GET, Constants.API_URL + "/departments/**").authenticated()
-                        .requestMatchers(Constants.API_URL + Constants.EMPLOYEES_URL + "/**").authenticated()
+                        .requestMatchers(Constants.API_URL + Constants.PRODUCTS_URL + "/**").authenticated()
+                        .requestMatchers(Constants.API_URL + Constants.REVIEWS_URL + "/**").authenticated()
+                        .requestMatchers(Constants.API_URL + Constants.CATEGORIES_URL + "/**").authenticated()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

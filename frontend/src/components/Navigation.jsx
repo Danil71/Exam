@@ -17,7 +17,7 @@ const Navigation = observer(() => {
         <header>
             <Navbar bg="dark" data-bs-theme="dark" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand as={Link} to="/">Телефонный справочник</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/">Интернет-магазин</Navbar.Brand>
                     <Navbar.Toggle aria-controls="main-nav" />
                     <Navbar.Offcanvas id="main-nav" placement="end">
                         <Offcanvas.Header closeButton>
@@ -25,14 +25,13 @@ const Navigation = observer(() => {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="me-auto">
-                                <Nav.Link as={Link} to="/my-employees">Мой отдел</Nav.Link>
-                                <Nav.Link as={Link} to="/directory">Справочник</Nav.Link>
+                                <Nav.Link as={Link} to="/products">Каталог</Nav.Link>
+                                <Nav.Link as={Link} to="/my-reviews">Мои отзывы</Nav.Link>
                                 {store.isAdmin && (
                                     <NavDropdown title="Администрирование" data-testid="nav-management-dropdown">
-                                        <NavDropdown.Item as={Link} to="/admin/department">Отделы</NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/admin/employee">Сотрудники</NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/admin/phone-number">Телефоны</NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/admin/user">Пользователи</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/admin/products">Товары</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/admin/categories">Категории</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/admin/users">Пользователи</NavDropdown.Item>
                                     </NavDropdown>
                                 )}
                             </Nav>

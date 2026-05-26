@@ -26,7 +26,6 @@ const useUsersForm = (id, usersChangeHandle) => {
             email: user.email,
             password: user.password || undefined,
             role: user.role,
-            employeeId: user.employeeId ? Number(user.employeeId) : null,
         };
         try {
             if (id === undefined || id === null) {

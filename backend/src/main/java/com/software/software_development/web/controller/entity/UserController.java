@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.software.software_development.core.configuration.Constants;
-import com.software.software_development.model.entity.EmployeeEntity;
 import com.software.software_development.model.entity.UserEntity;
-import com.software.software_development.service.entity.EmployeeService;
 import com.software.software_development.service.entity.UserService;
 import com.software.software_development.web.dto.entity.UserDto;
 import com.software.software_development.web.dto.pagination.PageDto;
@@ -31,26 +29,16 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
     private final UserService userService;
-    private final EmployeeService employeeService;
     private final ModelMapper modelMapper;
 
     public UserDto toDto(UserEntity entity) {
         UserDto dto = modelMapper.map(entity, UserDto.class);
-        if (entity.getEmployee() != null) {
-            dto.setEmployeeId(entity.getEmployee().getId());
-            dto.setEmployeeName(entity.getEmployee().getName());
-        }
         dto.setPassword(null);
         return dto;
     }
 
     public UserEntity toEntity(UserDto dto) {
-        UserEntity entity = modelMapper.map(dto, UserEntity.class);
-        if (dto.getEmployeeId() != null) {
-            EmployeeEntity employee = employeeService.get(dto.getEmployeeId());
-            entity.setEmployee(employee);
-        }
-        return entity;
+        return modelMapper.map(dto, UserEntity.class);
     }
 
     @GetMapping

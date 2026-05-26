@@ -53,7 +53,6 @@ export default class Store {
             login: data.login,
             email: data.email,
             role: data.role,
-            employeeId: data.employeeId,
         });
         this.setAuth(true);
         this.setLoginError('');
@@ -111,7 +110,6 @@ export default class Store {
                 login: data.login,
                 email: data.email,
                 role: data.role,
-                employeeId: data.employeeId,
             });
             this.setAuth(true);
         } catch {
