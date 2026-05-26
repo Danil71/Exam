@@ -78,6 +78,14 @@ public class ProductService extends AbstractEntityService<ProductEntity> {
         return existing;
     }
 
+    @Transactional
+    public void refreshSearchFields() {
+        repository.findAllList().forEach(product -> {
+            product.normalizeSearchFields();
+            repository.save(product);
+        });
+    }
+
     private UserEntity resolveOwner(Long ownerId) {
         if (ownerId == null) {
             throw new IllegalArgumentException("Product owner is required");

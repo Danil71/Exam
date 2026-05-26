@@ -33,12 +33,20 @@ public class EntityInitializer {
     @Transactional
     public void initializeAll() {
         if (!userService.getAll().isEmpty()) {
+            refreshSearchFields();
             return;
         }
         List<UserEntity> users = createUsers();
         List<CategoryEntity> categories = createCategories();
         List<ProductEntity> products = createProducts(users, categories);
         createReviews(users, products);
+        refreshSearchFields();
+    }
+
+    @Transactional
+    public void refreshSearchFields() {
+        productService.refreshSearchFields();
+        reviewService.refreshSearchFields();
     }
 
     private List<UserEntity> createUsers() {

@@ -2,6 +2,7 @@ package com.software.software_development.service.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -29,13 +30,13 @@ public final class ProductSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             if (params.getSearch() != null && !params.getSearch().isBlank()) {
-                String pattern = "%" + params.getSearch().trim().toLowerCase() + "%";
-                predicates.add(cb.like(cb.lower(root.get("name")), pattern));
+                String pattern = "%" + params.getSearch().trim().toLowerCase(Locale.ROOT) + "%";
+                predicates.add(cb.like(root.get("searchName"), pattern));
             }
 
             if (params.getOwner() != null && !params.getOwner().isBlank()) {
                 Join<ProductEntity, UserEntity> owner = root.join("owner", JoinType.LEFT);
-                String pattern = "%" + params.getOwner().trim().toLowerCase() + "%";
+                String pattern = "%" + params.getOwner().trim().toLowerCase(Locale.ROOT) + "%";
                 predicates.add(cb.like(cb.lower(owner.get("login")), pattern));
             }
 

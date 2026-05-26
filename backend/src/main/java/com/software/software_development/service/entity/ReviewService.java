@@ -76,6 +76,14 @@ public class ReviewService extends AbstractEntityService<ReviewEntity> {
         return existing;
     }
 
+    @Transactional
+    public void refreshSearchFields() {
+        repository.findAllList().forEach(review -> {
+            review.normalizeSearchFields();
+            repository.save(review);
+        });
+    }
+
     private ReviewEntity getOwned(long id, Long authorId) {
         ReviewEntity review = get(id);
         if (!review.getAuthor().getId().equals(authorId)) {

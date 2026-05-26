@@ -26,6 +26,8 @@ public class SoftwareDevelopmentApplication implements CommandLineRunner{
 	public void run(String... args) {
 		if (args.length > 0 && Arrays.asList(args).contains("--populate")) {
 			initializer.initializeAll();
+		} else {
+			initializer.refreshSearchFields();
 		}
 	}
 }

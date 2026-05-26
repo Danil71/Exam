@@ -3,6 +3,7 @@ package com.software.software_development.service.entity;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -32,11 +33,11 @@ public final class ReviewSpecification {
 
             if (params.getSearch() != null && !params.getSearch().isBlank()) {
                 Join<ReviewEntity, ProductEntity> product = root.join("product", JoinType.LEFT);
-                String pattern = "%" + params.getSearch().trim().toLowerCase() + "%";
+                String pattern = "%" + params.getSearch().trim().toLowerCase(Locale.ROOT) + "%";
                 predicates.add(cb.or(
-                        cb.like(cb.lower(root.get("title")), pattern),
-                        cb.like(cb.lower(root.get("text")), pattern),
-                        cb.like(cb.lower(product.get("name")), pattern)
+                        cb.like(root.get("searchTitle"), pattern),
+                        cb.like(root.get("searchText"), pattern),
+                        cb.like(product.get("searchName"), pattern)
                 ));
             }
 

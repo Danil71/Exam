@@ -2,6 +2,7 @@ package com.software.software_development.model.entity;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -15,6 +16,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +32,9 @@ public class ProductEntity extends BaseEntity {
 
     @Column(nullable = false, length = 100)
     private String name;
+
+    @Column(name = "search_name", length = 100)
+    private String searchName;
 
     @Column(nullable = false, length = 1000)
     private String description;
@@ -73,6 +79,16 @@ public class ProductEntity extends BaseEntity {
 
     public int getReviewCount() {
         return reviews.size();
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void normalizeSearchFields() {
+        this.searchName = normalize(name);
+    }
+
+    private String normalize(String value) {
+        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
     }
 
     @Override

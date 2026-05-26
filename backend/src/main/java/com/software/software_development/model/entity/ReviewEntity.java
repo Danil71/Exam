@@ -2,6 +2,7 @@ package com.software.software_development.model.entity;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -43,8 +44,14 @@ public class ReviewEntity extends BaseEntity {
     @Column(nullable = false, length = 100)
     private String title;
 
+    @Column(name = "search_title", length = 100)
+    private String searchTitle;
+
     @Column(nullable = false, length = 1000)
     private String text;
+
+    @Column(name = "search_text", length = 1000)
+    private String searchText;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -64,11 +71,22 @@ public class ReviewEntity extends BaseEntity {
         LocalDateTime now = LocalDateTime.now(ZoneId.of("+00:00"));
         this.createdAt = now;
         this.updatedAt = now;
+        normalizeSearchFields();
     }
 
     @PreUpdate
     private void touch() {
         this.updatedAt = LocalDateTime.now(ZoneId.of("+00:00"));
+        normalizeSearchFields();
+    }
+
+    public void normalizeSearchFields() {
+        this.searchTitle = normalize(title);
+        this.searchText = normalize(text);
+    }
+
+    private String normalize(String value) {
+        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
     }
 
     @Override
